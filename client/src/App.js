@@ -10,14 +10,18 @@ function App() {
 
   const handleUrlChange = (e) => setUrl(e.target.value);
 
+  // Post to back-end API and receive shortened URL
   const shortenUrl = () => {
+    setLoading(true);
     fetch(`${API_URL}/url?url=${url}`, {
       method: 'POST',
       mode: 'cors',
     })
       .then((response) => response.json())
       .then((data) => {
+        // Set shortened URL to display to user
         setShortUrl(data.shortUrl);
+        setLoading(false);
       });
   };
 
@@ -33,7 +37,8 @@ function App() {
           className="url-input"
           autoFocus={true}
         ></input>
-        <button onClick={shortenUrl} className="button">
+        {/* Disable button so user can't submit multiple queries */}
+        <button onClick={shortenUrl} disabled={loading} className="button">
           {loading ? 'Creating Short URL...' : 'Shorten URL'}
         </button>
         <h5>{shortUrl ? 'Shortened URL:' : ''}</h5>
