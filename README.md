@@ -41,6 +41,7 @@ npm start
 ## Assumption Made
 
 - Users who create short URLs will continuously use them. Short URLs won't go unused and take space in database
+- Users will enter URLs with full web address, including `http://`
 
 ## Limitations
 
